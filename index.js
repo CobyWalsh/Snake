@@ -14,6 +14,7 @@ let yVelocity = 0;
 // Game Loop
 function drawGame() {
 clearScreen();
+changeSnakePosition();
 drawSnake();
 setTimeout(drawGame, 1000/ speed);
 }
@@ -26,6 +27,21 @@ function clearScreen() {
 function drawSnake() {
     ctx.fillStyle = 'orange'
     ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
+}
+
+function changeSnakePosition() {
+    headX = headX + xVelocity;
+    headY = headY + yVelocity;
+}
+
+document.body.addEventListener('keydown', keyDown);
+
+function keyDown(event) {
+    // up
+    if(event.keyCode == 38) {
+        yVelocity = -1;
+        xVelocity = 0;
+    }
 }
 
 drawGame();
