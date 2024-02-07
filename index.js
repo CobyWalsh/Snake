@@ -42,6 +42,24 @@ function keyDown(event) {
         yVelocity = -1;
         xVelocity = 0;
     }
+
+     // down
+     if(event.keyCode == 40) {
+        yVelocity = 1;
+        xVelocity = 0;
+    }
+
+     // left
+     if(event.keyCode == 37) {
+        yVelocity = 0;
+        xVelocity = -1;
+    }
+
+     // right
+     if(event.keyCode == 39) {
+        yVelocity = 0;
+        xVelocity = 1;
+    }
 }
 
 drawGame();
