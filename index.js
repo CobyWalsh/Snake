@@ -1,12 +1,22 @@
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 
+
+class SnakePart {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
 let speed = 7;
 
 let tileCount = 20;
 let tileSize = canvas.width / tileCount - 2;
 let headX = 10;
 let headY = 10;
+const SnakeParts = [];
+let tailLength = 2;
 
 let appleX = 5;
 let appleY = 5;
@@ -30,14 +40,26 @@ function clearScreen() {
 }
 
 function drawSnake() {
-    ctx.fillStyle = 'orange'
-    ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
+    ctx.fillStyle = 'green';
+    for(let i = 0; i < SnakeParts.length; i++) {
+        let part = SnakeParts[i];
+        ctx.fillRect(part.x * tileCount, part.y *tileCount, tileSize, tileSize);
+    }
+
+SnakeParts.push(new SnakePart(headX, headY)); // put an item at the end of the list next to the head.
+if(SnakeParts.lenght > tailLength) {
+    SnakeParts.shift(); // remove the further item from the snake parts if have more than our tail size.
+  }
+
+  ctx.fillStyle = 'orange'
+  ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
 }
 
 function changeSnakePosition() {
     headX = headX + xVelocity;
     headY = headY + yVelocity;
 }
+
 
 function drawApple() {
     ctx.fillStyle = "red";
@@ -48,6 +70,7 @@ function checkAppleCollision() {
 if (appleX === headX && appleY == headY) {
     appleX = Math.floor(Math.random() * tileCount);
     appleY = Math.floor(Math.random() * tileCount);
+    tailLength++;
 }
 }
 
