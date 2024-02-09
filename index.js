@@ -26,6 +26,8 @@ let yVelocity = 0;
 
 let score = 0;
 
+const gulpSound = new Audio("gulp.mp3");
+
 // Game Loop
 function drawGame() {
 changeSnakePosition();
@@ -39,6 +41,14 @@ drawApple();
 checkAppleCollision();
 drawSnake();
 drawScore();
+
+if(score > 5) {
+    speed = 11;
+}
+if(score > 10) {
+    speed = 15;
+}
+
 setTimeout(drawGame, 1000/ speed);
 }
 
@@ -98,18 +108,18 @@ function clearScreen() {
 }
 
 function drawSnake() {
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = "green";
     for(let i = 0; i < SnakeParts.length; i++) {
         let part = SnakeParts[i];
         ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
     }
 
 SnakeParts.push(new SnakePart(headX, headY)); // put an item at the end of the list next to the head.
-if(SnakeParts.lenght > tailLength) {
+while (SnakeParts.lenght > tailLength) {
     SnakeParts.shift(); // remove the further item from the snake parts if have more than our tail size.
   }
 
-  ctx.fillStyle = 'orange'
+  ctx.fillStyle = "orange";
   ctx.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
 }
 
@@ -130,7 +140,8 @@ if (appleX === headX && appleY == headY) {
     appleY = Math.floor(Math.random() * tileCount);
     tailLength++;
     score++;
-}
+    gulpSound.play();
+    }
 }
 
 document.body.addEventListener('keydown', keyDown);
