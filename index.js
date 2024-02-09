@@ -28,13 +28,48 @@ let score = 0;
 
 // Game Loop
 function drawGame() {
-clearScreen();
 changeSnakePosition();
+let result = isGameOver();
+if(result) {
+    return;
+}
+
+clearScreen();
 drawApple();
 checkAppleCollision();
 drawSnake();
 drawScore();
 setTimeout(drawGame, 1000/ speed);
+}
+
+function isGameOver() {
+    let gameOver = false;
+    // walls
+    if(headX < 0) {
+        gameOver = true;
+    }
+    else if(headX === tileCount) {
+        gameOver = true;
+    }
+    else if(headY < 0) {
+        gameOver = true;
+    }
+    else if(headY === tileCount) {
+        gameOver = true;
+    }
+    if(gameOver) {
+        ctx.fillStyle = "white";
+        ctx.font = "50px Verdana";
+
+        var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+        gradient.addColorStop("0", " magenta");
+        gradient.addColorStop("0.5", "blue");
+        gradient.addColorStop("1.0", "red");
+        // fill with gradient
+        ctx.fillStyle = gradient;
+        ctx.fillText("Game Over! :(", canvas.width / 6.5, canvas.height / 2);
+    }
+    return gameOver;
 }
 
 function drawScore() {
@@ -52,7 +87,7 @@ function drawSnake() {
     ctx.fillStyle = 'green';
     for(let i = 0; i < SnakeParts.length; i++) {
         let part = SnakeParts[i];
-        ctx.fillRect(part.x * tileCount, part.y *tileCount, tileSize, tileSize);
+        ctx.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
     }
 
 SnakeParts.push(new SnakePart(headX, headY)); // put an item at the end of the list next to the head.
@@ -80,6 +115,7 @@ if (appleX === headX && appleY == headY) {
     appleX = Math.floor(Math.random() * tileCount);
     appleY = Math.floor(Math.random() * tileCount);
     tailLength++;
+    score++;
 }
 }
 
