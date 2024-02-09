@@ -24,6 +24,8 @@ let appleY = 5;
 let xVelocity = 0;
 let yVelocity = 0;
 
+let score = 0;
+
 // Game Loop
 function drawGame() {
 clearScreen();
@@ -31,9 +33,16 @@ changeSnakePosition();
 drawApple();
 checkAppleCollision();
 drawSnake();
+drawScore();
 setTimeout(drawGame, 1000/ speed);
 }
 
+function drawScore() {
+    ctx.fillStyle = "white";
+    ctx.font = "10px Verdana"
+    ctx.fillText("Score " + score, canvas.width - 50, 10);
+}
+ 
 function clearScreen() {
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0,canvas.clientWidth,canvas.height);
