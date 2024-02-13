@@ -115,7 +115,7 @@ function drawSnake() {
     }
 
 SnakeParts.push(new SnakePart(headX, headY)); // put an item at the end of the list next to the head.
-while (SnakeParts.lenght > tailLength) {
+while (SnakeParts.length > tailLength) {
     SnakeParts.shift(); // remove the further item from the snake parts if have more than our tail size.
   }
 
@@ -127,7 +127,6 @@ function changeSnakePosition() {
     headX = headX + xVelocity;
     headY = headY + yVelocity;
 }
-
 
 function drawApple() {
     ctx.fillStyle = "red";
