@@ -91,7 +91,7 @@ function isGameOver() {
         gradient.addColorStop("1.0", "red");
         // fill with gradient
         ctx.fillStyle = gradient;
-        ctx.fillText("Game Over! :(", canvas.width / 6.5, canvas.height / 2);
+        ctx.fillText("Game Over!:(", canvas.width / 14.5, canvas.height / 2);
     }
     return gameOver;
 }
