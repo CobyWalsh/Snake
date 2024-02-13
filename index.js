@@ -148,7 +148,7 @@ document.body.addEventListener('keydown', keyDown);
 
 function keyDown(event) {
     // up
-    if(event.keyCode == 38) {
+    if(event.keyCode == 38 || event.keyCode == 87) {
         if(yVelocity == 1)
             return;
         yVelocity = -1;
@@ -156,7 +156,7 @@ function keyDown(event) {
     }
 
      // down
-     if(event.keyCode == 40) {
+     if(event.keyCode == 40 || event.keyCode == 83) {
         if(yVelocity == -1)
             return;
         yVelocity = 1;
@@ -164,7 +164,7 @@ function keyDown(event) {
     }
 
      // left
-     if(event.keyCode == 37) {
+     if(event.keyCode == 37 || event.keyCode == 65) {
         if(xVelocity == 1)
             return;
         yVelocity = 0;
@@ -172,7 +172,7 @@ function keyDown(event) {
     }
 
      // right
-     if(event.keyCode == 39) {
+     if(event.keyCode == 39 || event.keyCode == 68) {
         if(xVelocity == -1)
             return;
         yVelocity = 0;
